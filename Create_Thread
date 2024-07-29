@@ -1,0 +1,27 @@
+#include <windows.h>
+#include <stdio.h>
+
+//#include <pthread.h>
+typedef char* string;
+void input(string);
+int main()
+{
+	//crate thread...
+	string name = "ziad ahmed";
+	//printf("hello enter char plz\n");
+	input(name);
+	
+	CreateThread(0, 0, input,name, 0, 0, 0);
+	getchar();  	              // to give the theard Enough time for implementation ....
+	              
+	printf("finish\n");
+
+	
+	
+	// multithread in the same process = multiprocess
+}
+void input(char* name) {
+	
+	printf("hello %s\n",name);
+	
+}
