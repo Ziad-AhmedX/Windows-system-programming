@@ -1,0 +1,27 @@
+#include <windows.h>
+#include <stdio.h>
+#include <psapi.h>
+//#include <errhandlingapi.h>
+
+int  main()
+{
+
+	//create process............
+	STARTUPINFOW si;
+	memset(&si, 0, sizeof(si));
+	PROCESS_INFORMATION pi;
+	int x = CreateProcessA(0, "CFF.exe", 0, 0, 0, 0, 0, 0, &si, &pi);
+	if (x == 0) {
+		printf("failed to create process %d\n",GetLastError()); 
+		// if x = 1 then succeed
+	}
+	
+	printf("process id = %d\n", pi.dwProcessId);
+	int id = pi.dwProcessId;
+	
+	// open process 
+	void* hprocess = OpenProcess(PROCESS_TERMINATE, 0, id); 
+	getchar();
+	TerminateProcess(hprocess, 0);
+	getchar();
+}
